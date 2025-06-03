@@ -29,7 +29,6 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 ---
 
 
-![Uploading image.png…]()
 
 ##  Features
 
@@ -41,7 +40,7 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## 📦 Data Collection
+##  Data Collection
 
 - Captured custom dataset using webcam
 - Saved 60-frame sequences (21 landmarks × 3D) per gesture
@@ -74,7 +73,7 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## 🛠 Dependencies
+##  Dependencies
 
 - Python 3.x
 - OpenCV
