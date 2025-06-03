@@ -1,6 +1,6 @@
-# ✋ Unified Gesture Control
+# ✋Palmpilot
 
-## 📖 Introduction
+##  Introduction
 This project is the final-year capstone for the Machine Learning specialization at Holberton School.
 
 It is an upgraded system that **uses hand gestures to control a computer**, including:
@@ -28,7 +28,10 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## ✨ Features
+
+![Uploading image.png…]()
+
+##  Features
 
 - Control mouse cursor using index fingertip
 - Perform left/right clicks, double clicks, and drag using finger pinches
@@ -54,7 +57,7 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## 🧠 Model
+##  Model
 
 - **Architecture**:
   - LSTM (64) → Dropout → LSTM (64) → Dropout → Dense (64, ReLU) → Dense (softmax)
@@ -65,13 +68,13 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## 🎮 Gesture-to-Action Mapping
+##  Gesture-to-Action Mapping
 
 
 
 ---
 
-## 🛠️ Dependencies
+## 🛠 Dependencies
 
 - Python 3.x
 - OpenCV
@@ -82,9 +85,10 @@ With no external APIs, it runs entirely on the local machine using just a webcam
 
 ---
 
-## 🚀 How to Run
 
-### 1️⃣ Install Dependencies
-```bash
-pip install opencv-python mediapipe tensorflow keras pyautogui numpy
+## Conclusion
+This project showcases how machine learning + computer vision can power intuitive, touchless control systems.
+By combining LSTM gesture recognition with real-time OS interaction, we bridge cutting-edge AI and practical user applications — creating a system that’s both innovative and accessible.
+
+
 
