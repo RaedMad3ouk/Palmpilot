@@ -1,122 +1,90 @@
-# Palmpilot
-Introduction
+# ✋ Unified Gesture Control
+
+## 📖 Introduction
 This project is the final-year capstone for the Machine Learning specialization at Holberton School.
-It is an upgraded system that uses hand gestures to control a computer — including media actions (scroll, zoom) and direct mouse interaction (move, click, drag).
+
+It is an upgraded system that **uses hand gestures to control a computer**, including:
+- Media actions like scroll and zoom
+- Direct mouse interaction like move, click, drag
 
 The system combines:
- Computer Vision (MediaPipe)
- Sequence Modeling (LSTM Neural Networks)
- GUI Automation (PyAutoGUI)
+- Computer Vision (MediaPipe)
+- Sequence Modeling (LSTM Neural Networks)
+- GUI Automation (PyAutoGUI)
 
-With no external APIs needed, the system runs entirely on the local machine using just a webcam.
+With no external APIs, it runs entirely on the local machine using just a webcam.
 
-Project Architecture
-Component	Description
-Gesture Data Collection	Captures hand landmark sequences using MediaPipe and saves them as .npy files.
-Sequence Classifier	An LSTM-based neural network trained to classify gesture sequences over time.
-Real-Time Prediction	Feeds live landmark sequences from the webcam into the model for gesture recognition.
-Function Mode	Maps gestures to actions like scroll up/down, zoom in/out, or switching to mouse mode.
-Mouse Mode	Maps hand movement to cursor control, supports left/right clicks, double-clicks, and drag.
+---
 
-Features
-Control mouse cursor with index fingertip
+## 🏗️ Project Architecture
 
-Perform left/right clicks, double clicks, and drag using finger pinches
+| Component                  | Description                                                                            |
+|----------------------------|----------------------------------------------------------------------------------------|
+| **Gesture Data Collection** | Captures hand landmark sequences using MediaPipe, saved as `.npy` files.               |
+| **Sequence Classifier**     | LSTM-based neural network trained to classify gesture sequences over time.             |
+| **Real-Time Prediction**    | Feeds live landmark sequences from the webcam into the model for gesture recognition.  |
+| **Function Mode**           | Maps gestures to actions (scroll, zoom, switch to mouse).                              |
+| **Mouse Mode**              | Maps hand movement to cursor, with left/right clicks, double-click, and drag support.  |
 
-Switch between gesture control and mouse control modes using a thumbs-up gesture
+---
 
-Smooth, real-time predictions based on 60-frame landmark sequences
+## ✨ Features
 
-Confidence thresholding and cooldown timers to prevent false triggers
+- Control mouse cursor using index fingertip
+- Perform left/right clicks, double clicks, and drag using finger pinches
+- Switch between **gesture mode** and **mouse mode** using thumbs-up gesture
+- Smooth, real-time predictions based on 60-frame landmark sequences
+- Confidence thresholds + cooldown timers to reduce false triggers
 
-Data Collection
-Captured own dataset using webcam
+---
 
-Saved 60-frame sequences of hand landmarks (21 points × 3D)
+## 📦 Data Collection
 
-Gestures include:
+- Captured custom dataset using webcam
+- Saved 60-frame sequences (21 landmarks × 3D) per gesture
+- Collected under varied lighting and conditions for robustness
+- Final gesture classes:
+  - `zoom in`
+  - `zoom out`
+  - `scroll up`
+  - `scroll down`
+  - `switch` (thumbs-up)
+  - `neutral` (no gesture)
+- Stored as `.npy` files and combined into a `sequence_data.pickle` file for training
 
-Zoom In
+---
 
-Zoom Out
+## 🧠 Model
 
-Scroll Up
+- **Architecture**:
+  - LSTM (64) → Dropout → LSTM (64) → Dropout → Dense (64, ReLU) → Dense (softmax)
+- **Loss**: Categorical Cross-Entropy
+- **Optimizer**: Adam
+- **Training**: 35 epochs, batch size 16, ~96% test accuracy
+- **Output**: `model.keras` file for live prediction
 
-Scroll Down
+---
 
-Switch (Thumbs-Up)
+## 🎮 Gesture-to-Action Mapping
 
-Neutral (No Gesture)
 
-Stored raw .npy files per sequence and combined into a single .pickle file for training
 
-Model
-Architecture:
+---
 
-Two stacked LSTM layers (64 units)
+## 🛠️ Dependencies
 
-Dropout layers for regularization
+- Python 3.x
+- OpenCV
+- MediaPipe
+- TensorFlow / Keras
+- PyAutoGUI
+- NumPy
 
-Dense softmax output layer for multi-class classification
+---
 
-Loss Function: Categorical Cross-Entropy
+## 🚀 How to Run
 
-Optimizer: Adam
-
-Training: 35 epochs, batch size 16, ~96% test accuracy
-
-Final Output: model.keras saved and loaded for real-time use
-
-Gesture-to-Action Mapping
-Gesture	Action
-Scroll Up	pyautogui.scroll(+300)
-Scroll Down	pyautogui.scroll(-300)
-Zoom In	pyautogui.hotkey('ctrl', '+')
-Zoom Out	pyautogui.hotkey('ctrl', '-')
-Switch	Switch between gesture and mouse modes
-Mouse Mode	Move cursor, right click, left click, drag
-
-Dependencies
-Python 3.x
-
-OpenCV
-
-TensorFlow / Keras
-
-MediaPipe
-
-PyAutoGUI
-
-NumPy
-
-How to Run
-Install Dependencies:
-
+### 1️⃣ Install Dependencies
+```bash
 pip install opencv-python mediapipe tensorflow keras pyautogui numpy
-2️⃣ Collect Data (optional, for retraining):
 
-python collect_sequences.py
-3️⃣ Train Model:
-
-python train_lstm.py
-
-4️⃣ Run Real-Time Controller:
-
-python gesture_controller.py
-
-
-Future Improvements
-
-Add more diverse gestures and conditions
-
-Improve edge detection for ultra-wide screens
-
-Build GUI overlay for live feedback
-
-Explore transformer models for richer sequence learning
-
-Integrate with accessibility tools for hands-free control
-
-Conclusion
-This project shows how machine learning + computer vision can create intuitive, touchless control systems for everyday tasks.
-By combining LSTM-based gesture recognition with real-time GUI automation, we built a system that bridges AI research and practical, user-friendly applications.
